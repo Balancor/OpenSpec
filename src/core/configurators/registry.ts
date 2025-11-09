@@ -8,36 +8,42 @@ import { AgentsStandardConfigurator } from './agents.js';
 import { QwenConfigurator } from './qwen.js';
 
 export class ToolRegistry {
-  private static tools: Map<string, ToolConfigurator> = new Map();
+  private static toolConstructors: Map<string, new (...args: any[]) => ToolConfigurator> = new Map();
 
   static {
-    const claudeConfigurator = new ClaudeConfigurator();
-    const clineConfigurator = new ClineConfigurator();
-    const codeBuddyConfigurator = new CodeBuddyConfigurator();
-    const costrictConfigurator = new CostrictConfigurator();
-    const qoderConfigurator = new QoderConfigurator();
-    const agentsConfigurator = new AgentsStandardConfigurator();
-    const qwenConfigurator = new QwenConfigurator();
-    // Register with the ID that matches the checkbox value
-    this.tools.set('claude', claudeConfigurator);
-    this.tools.set('cline', clineConfigurator);
-    this.tools.set('codebuddy', codeBuddyConfigurator);
-    this.tools.set('costrict', costrictConfigurator);
-    this.tools.set('qoder', qoderConfigurator);
-    this.tools.set('agents', agentsConfigurator);
-    this.tools.set('qwen', qwenConfigurator);
+    // Register constructors instead of instances
+    this.toolConstructors.set('claude', ClaudeConfigurator);
+    this.toolConstructors.set('cline', ClineConfigurator);
+    this.toolConstructors.set('codebuddy', CodeBuddyConfigurator);
+    this.toolConstructors.set('costrict', CostrictConfigurator);
+    this.toolConstructors.set('qoder', QoderConfigurator);
+    this.toolConstructors.set('agents', AgentsStandardConfigurator);
+    this.toolConstructors.set('qwen', QwenConfigurator);
   }
 
-  static register(tool: ToolConfigurator): void {
-    this.tools.set(tool.name.toLowerCase().replace(/\s+/g, '-'), tool);
+  static register(toolConstructor: new (...args: any[]) => ToolConfigurator, toolId: string): void {
+    this.toolConstructors.set(toolId, toolConstructor);
   }
 
   static get(toolId: string): ToolConfigurator | undefined {
-    return this.tools.get(toolId);
+    const Constructor = this.toolConstructors.get(toolId);
+    if (!Constructor) {
+      return undefined;
+    }
+    // For backward compatibility, create instance with no args by default
+    return new Constructor();
+  }
+
+  static create(toolId: string, ...args: any[]): ToolConfigurator | undefined {
+    const Constructor = this.toolConstructors.get(toolId);
+    if (!Constructor) {
+      return undefined;
+    }
+    return new Constructor(...args);
   }
 
   static getAll(): ToolConfigurator[] {
-    return Array.from(this.tools.values());
+    return Array.from(this.toolConstructors.keys()).map(id => this.get(id)!).filter(Boolean);
   }
 
   static getAvailable(): ToolConfigurator[] {

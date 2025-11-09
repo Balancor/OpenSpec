@@ -792,7 +792,8 @@ export class InitCommand {
     projectPath: string,
     openspecDir: string
   ): Promise<RootStubStatus> {
-    const configurator = ToolRegistry.get('agents');
+    // Create configurator with language setting
+    const configurator = ToolRegistry.create('agents', this.language);
     if (!configurator || !configurator.isAvailable) {
       return 'skipped';
     }

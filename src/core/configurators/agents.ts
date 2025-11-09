@@ -8,10 +8,15 @@ export class AgentsStandardConfigurator implements ToolConfigurator {
   name = 'AGENTS.md standard';
   configFileName = 'AGENTS.md';
   isAvailable = true;
+  private language: 'en' | 'zh' = 'en';
+
+  constructor(language: 'en' | 'zh' = 'en') {
+    this.language = language;
+  }
 
   async configure(projectPath: string, _openspecDir: string): Promise<void> {
     const filePath = path.join(projectPath, this.configFileName);
-    const content = TemplateManager.getAgentsStandardTemplate();
+    const content = TemplateManager.getAgentsStandardTemplate(this.language);
 
     await FileSystemUtils.updateFileWithMarkers(
       filePath,
