@@ -12,14 +12,23 @@ export class ToolRegistry {
   private static toolConstructors: Map<string, new (...args: any[]) => ToolConfigurator> = new Map();
 
   static {
-    this.toolConstructors.set('claude', ClaudeConfigurator);
-    this.toolConstructors.set('cline', ClineConfigurator);
-    this.toolConstructors.set('codebuddy', CodeBuddyConfigurator);
-    this.toolConstructors.set('costrict', CostrictConfigurator);
-    this.toolConstructors.set('qoder', QoderConfigurator);
-    this.toolConstructors.set('iflow', IflowConfigurator);
-    this.toolConstructors.set('agents', AgentsStandardConfigurator);
-    this.toolConstructors.set('qwen', QwenConfigurator);
+    const claudeConfigurator = new ClaudeConfigurator();
+    const clineConfigurator = new ClineConfigurator();
+    const codeBuddyConfigurator = new CodeBuddyConfigurator();
+    const costrictConfigurator = new CostrictConfigurator();
+    const qoderConfigurator = new QoderConfigurator();
+    const iflowConfigurator = new IflowConfigurator();
+    const agentsConfigurator = new AgentsStandardConfigurator();
+    const qwenConfigurator = new QwenConfigurator();
+    // Register with the ID that matches the checkbox value
+    this.tools.set('claude', claudeConfigurator);
+    this.tools.set('cline', clineConfigurator);
+    this.tools.set('codebuddy', codeBuddyConfigurator);
+    this.tools.set('costrict', costrictConfigurator);
+    this.tools.set('qoder', qoderConfigurator);
+    this.tools.set('iflow', iflowConfigurator);
+    this.tools.set('agents', agentsConfigurator);
+    this.tools.set('qwen', qwenConfigurator);
   }
 
   static register(toolConstructor: new (...args: any[]) => ToolConfigurator, toolId: string): void {
