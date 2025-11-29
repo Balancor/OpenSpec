@@ -85,8 +85,8 @@ export class ChangeParser extends MarkdownParser {
     const deltas: Delta[] = [];
     const sections = this.parseSectionsFromContent(content);
     
-    // Parse ADDED requirements
-    const addedSection = this.findSection(sections, 'ADDED Requirements');
+    // Parse ADDED requirements (support both English and Chinese)
+    const addedSection = this.findSection(sections, 'ADDED Requirements') || this.findSection(sections, '新增需求');
     if (addedSection) {
       const requirements = this.parseRequirements(addedSection);
       requirements.forEach(req => {
@@ -101,8 +101,8 @@ export class ChangeParser extends MarkdownParser {
       });
     }
     
-    // Parse MODIFIED requirements
-    const modifiedSection = this.findSection(sections, 'MODIFIED Requirements');
+    // Parse MODIFIED requirements (support both English and Chinese)
+    const modifiedSection = this.findSection(sections, 'MODIFIED Requirements') || this.findSection(sections, '修改需求');
     if (modifiedSection) {
       const requirements = this.parseRequirements(modifiedSection);
       requirements.forEach(req => {
@@ -116,8 +116,8 @@ export class ChangeParser extends MarkdownParser {
       });
     }
     
-    // Parse REMOVED requirements
-    const removedSection = this.findSection(sections, 'REMOVED Requirements');
+    // Parse REMOVED requirements (support both English and Chinese)
+    const removedSection = this.findSection(sections, 'REMOVED Requirements') || this.findSection(sections, '删除需求');
     if (removedSection) {
       const requirements = this.parseRequirements(removedSection);
       requirements.forEach(req => {
@@ -131,8 +131,8 @@ export class ChangeParser extends MarkdownParser {
       });
     }
     
-    // Parse RENAMED requirements
-    const renamedSection = this.findSection(sections, 'RENAMED Requirements');
+    // Parse RENAMED requirements (support both English and Chinese)
+    const renamedSection = this.findSection(sections, 'RENAMED Requirements') || this.findSection(sections, '重命名需求');
     if (renamedSection) {
       const renames = this.parseRenames(renamedSection.content);
       renames.forEach(rename => {

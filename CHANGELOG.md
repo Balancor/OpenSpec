@@ -18,6 +18,10 @@
 ### Minor Changes
 
 - Add Antigravity slash command support so `openspec init` can generate `.agent/workflows/openspec-*.md` files with description-only frontmatter and `openspec update` refreshes existing workflows alongside Windsurf.
+- Enhance Chinese localization support with bilingual keyword validation and Chinese operation keywords (新增需求, 修改需求, 删除需求, 重命名需求)
+- Update validator to support both English (SHALL/MUST) and Chinese (必须/应当) keywords
+- Modify CLI to default to Chinese templates during initialization
+- Improve AI interaction default language support for Chinese users
 
 ## 0.15.0
 

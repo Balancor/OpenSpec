@@ -119,10 +119,28 @@ function normalizeLineEndings(content: string): string {
 export function parseDeltaSpec(content: string): DeltaPlan {
   const normalized = normalizeLineEndings(content);
   const sections = splitTopLevelSections(normalized);
-  const addedLookup = getSectionCaseInsensitive(sections, 'ADDED Requirements');
-  const modifiedLookup = getSectionCaseInsensitive(sections, 'MODIFIED Requirements');
-  const removedLookup = getSectionCaseInsensitive(sections, 'REMOVED Requirements');
-  const renamedLookup = getSectionCaseInsensitive(sections, 'RENAMED Requirements');
+  
+  // 支持中英文操作关键字
+  let addedLookup = getSectionCaseInsensitive(sections, 'ADDED Requirements');
+  if (!addedLookup.found) {
+    addedLookup = getSectionCaseInsensitive(sections, '新增需求');
+  }
+  
+  let modifiedLookup = getSectionCaseInsensitive(sections, 'MODIFIED Requirements');
+  if (!modifiedLookup.found) {
+    modifiedLookup = getSectionCaseInsensitive(sections, '修改需求');
+  }
+  
+  let removedLookup = getSectionCaseInsensitive(sections, 'REMOVED Requirements');
+  if (!removedLookup.found) {
+    removedLookup = getSectionCaseInsensitive(sections, '删除需求');
+  }
+  
+  let renamedLookup = getSectionCaseInsensitive(sections, 'RENAMED Requirements');
+  if (!renamedLookup.found) {
+    renamedLookup = getSectionCaseInsensitive(sections, '重命名需求');
+  }
+  
   const added = parseRequirementBlocksFromSection(addedLookup.body);
   const modified = parseRequirementBlocksFromSection(modifiedLookup.body);
   const removedNames = parseRemovedNames(removedLookup.body);

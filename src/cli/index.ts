@@ -41,7 +41,7 @@ program
   .command('init [path]')
   .description('Initialize OpenSpec in your project')
   .option('--tools <tools>', toolsOptionDescription)
-  .option('--language <language>', 'Set language for templates (en or zh)', 'en')
+  .option('--language <language>', 'Set language for templates (en or zh)', 'zh')
   .action(async (targetPath = '.', options?: { tools?: string; language?: string }) => {
     try {
       // Validate that the path is a valid directory

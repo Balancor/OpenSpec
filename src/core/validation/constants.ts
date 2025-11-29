@@ -16,7 +16,7 @@ export const VALIDATION_MESSAGES = {
   // Required content
   SCENARIO_EMPTY: 'Scenario text cannot be empty',
   REQUIREMENT_EMPTY: 'Requirement text cannot be empty',
-  REQUIREMENT_NO_SHALL: 'Requirement must contain SHALL or MUST keyword',
+  REQUIREMENT_NO_SHALL: 'Requirement must contain SHALL/MUST or 必须/应当 keyword',
   REQUIREMENT_NO_SCENARIOS: 'Requirement must have at least one scenario',
   SPEC_NAME_EMPTY: 'Spec name cannot be empty',
   SPEC_PURPOSE_EMPTY: 'Purpose section cannot be empty',
