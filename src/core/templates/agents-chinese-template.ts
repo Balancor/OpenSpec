@@ -440,6 +440,32 @@ notifications/spec.md
 3. 查看最近的归档
 4. 请求澄清
 
+## RooCode特定功能
+
+在使用RooCode与OpenSpec时，利用这些强大功能：
+
+### 上下文提及
+- 使用@/openspec/AGENTS.md直接引用这些指令
+- 使用@/openspec/project.md访问项目特定约定
+- 提及特定规范文件如@/openspec/specs/cli-init/spec.md以获取定向上下文
+- 使用文件夹提及如@/openspec/specs一次性加载所有规范文件
+
+### 并发文件读取
+- RooCode可以同时读取多个OpenSpec文件以获得更好的上下文理解
+- 高效地一次性加载整个规范目录
+- 利用批量文件读取来理解复杂的多功能变更
+
+### 代码操作集成
+- 使用灯泡菜单快速将OpenSpec文件添加到上下文
+- 直接在编辑器中访问OpenSpec相关任务的快速修复
+- 利用RooCode的工具批准工作流安全执行OpenSpec命令
+
+### 斜杠命令支持
+- 使用/openspec-proposal创建新的变更提案
+- 使用/openspec-apply实施已批准的变更
+- 使用/openspec-archive归档已完成的变更
+- 斜杠命令包含参数提示以便于使用
+
 ## 快速参考
 
 ### 阶段指示器

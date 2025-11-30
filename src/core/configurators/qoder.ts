@@ -21,12 +21,15 @@ export class QoderConfigurator implements ToolConfigurator {
   
   /** Indicates tool is available for configuration */
   isAvailable = true;
+  
+  /** Default language for Qoder template */
+  private defaultLanguage: 'en' | 'zh' = 'zh';
 
   /**
    * Configure Qoder integration for a project
    * 
    * Creates or updates QODER.md file with OpenSpec instructions.
-   * Uses Claude-compatible template for instruction content.
+   * Uses Qoder-specific template for enhanced integration.
    * Wrapped with OpenSpec markers for future updates.
    * 
    * @param {string} projectPath - Absolute path to project root directory
@@ -37,9 +40,9 @@ export class QoderConfigurator implements ToolConfigurator {
     // Construct full path to QODER.md at project root
     const filePath = path.join(projectPath, this.configFileName);
     
-    // Get Claude-compatible instruction template
-    // This ensures Qoder receives the same high-quality OpenSpec instructions
-    const content = TemplateManager.getClaudeTemplate();
+    // Get Qoder-specific instruction template
+    // This provides enhanced integration between Qoder and OpenSpec
+    const content = TemplateManager.getQoderTemplate(this.defaultLanguage);
     
     // Write or update file with managed content between markers
     // This allows future updates to refresh instructions automatically

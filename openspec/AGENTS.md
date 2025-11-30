@@ -451,4 +451,11 @@ openspec validate --strict # Is it correct?
 openspec archive <change-id> [--yes|-y]  # Mark complete (add --yes for automation)
 ```
 
+### Qoder-Specific Guidelines
+When using Qoder with OpenSpec:
+- Execute tasks sequentially from tasks.md, one at a time
+- Update task status markers immediately after completion (- [ ] to - [x])
+- Maintain accurate progress tracking in tasks.md
+- Reference @/openspec/AGENTS.md and @/openspec/project.md for context
+
 Remember: Specs are truth. Changes are proposals. Keep them in sync.

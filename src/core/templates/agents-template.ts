@@ -8,7 +8,7 @@ Instructions for AI coding assistants using OpenSpec for spec-driven development
 - Decide scope: new capability vs modify existing capability
 - Pick a unique \`change-id\`: kebab-case, verb-led (\`add-\`, \`update-\`, \`remove-\`, \`refactor-\`)
 - Scaffold: \`proposal.md\`, \`tasks.md\`, \`design.md\` (only if needed), and delta specs per affected capability
-- Write deltas: use \`## ADDED|MODIFIED|REMOVED|RENAMED Requirements\`; include at least one \`#### Scenario:\` per requirement
+- Write deltas: use \`## ADDED|MODIFIED|REMOVED Requirements\`; include at least one \`#### Scenario:\` per requirement
 - Validate: \`openspec validate [change-id] --strict\` and fix issues
 - Request approval: Do not start implementation until proposal is approved
 
@@ -271,7 +271,7 @@ Headers matched with \`trim(header)\` - whitespace ignored.
 - MODIFIED: Changes the behavior, scope, or acceptance criteria of an existing requirement. Always paste the full, updated requirement content (header + all scenarios). The archiver will replace the entire requirement with what you provide here; partial deltas will drop previous details.
 - RENAMED: Use when only the name changes. If you also change behavior, use RENAMED (name) plus MODIFIED (content) referencing the new name.
 
-Common pitfall: Using MODIFIED to add a new concern without including the previous text. This causes loss of detail at archive time. If you aren’t explicitly changing the existing requirement, add a new requirement under ADDED instead.
+Common pitfall: Using MODIFIED to add a new concern without including the previous text. This causes loss of detail at archive time. If you aren't explicitly changing the existing requirement, add a new requirement under ADDED instead.
 
 Authoring a MODIFIED requirement correctly:
 1) Locate the existing requirement in \`openspec/specs/<capability>/spec.md\`.
@@ -431,6 +431,32 @@ Only add complexity with:
 2. Check related specs
 3. Review recent archives
 4. Ask for clarification
+
+## RooCode-Specific Features
+
+When using OpenSpec with RooCode, take advantage of these powerful features:
+
+### Context Mentions
+- Use @/openspec/AGENTS.md to reference these instructions directly
+- Use @/openspec/project.md to access project-specific conventions
+- Mention specific spec files like @/openspec/specs/cli-init/spec.md for targeted context
+- Use folder mentions like @/openspec/specs to load all specification files at once
+
+### Concurrent File Reads
+- RooCode can read multiple OpenSpec files simultaneously for better context understanding
+- Efficiently load entire specification directories with a single request
+- Take advantage of batch file reading to understand complex multi-capability changes
+
+### Code Actions Integration
+- Use the lightbulb menu to quickly add OpenSpec files to context
+- Access quick fixes for OpenSpec-related tasks directly in the editor
+- Leverage RooCode's tool approval workflow for safe execution of OpenSpec commands
+
+### Slash Command Support
+- Use /openspec-proposal to create new change proposals
+- Use /openspec-apply to implement approved changes
+- Use /openspec-archive to archive completed changes
+- Slash commands include argument hints for easier usage
 
 ## Quick Reference
 

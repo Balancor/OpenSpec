@@ -21,6 +21,7 @@ const FILE_PATHS: Record<SlashCommandId, string> = {
  * YAML frontmatter for Qoder slash commands
  * Defines metadata displayed in Qoder's command palette
  * Each command is categorized and tagged for easy discovery
+ * Enhanced with task execution guidance for better OpenSpec integration
  */
 const FRONTMATTER: Record<SlashCommandId, string> = {
   proposal: `---
@@ -31,7 +32,7 @@ tags: [openspec, change]
 ---`,
   apply: `---
 name: OpenSpec: Apply
-description: Implement an approved OpenSpec change and keep tasks in sync.
+description: Implement an approved OpenSpec change and keep tasks in sync. Follow tasks.md precisely and update status markers after each completed task.
 category: OpenSpec
 tags: [openspec, apply]
 ---`,
@@ -49,6 +50,7 @@ tags: [openspec, archive]
  * Manages OpenSpec slash commands for Qoder AI assistant.
  * Creates three workflow commands: proposal, apply, and archive.
  * Uses colon-separated command format (/openspec:proposal).
+ * Enhanced with task execution and status tracking for better OpenSpec integration.
  * 
  * @extends {SlashCommandConfigurator}
  */

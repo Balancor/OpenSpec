@@ -49,10 +49,39 @@ const archiveReferences = `**Reference**
 - Use \`openspec list\` to confirm change IDs before archiving.
 - Inspect refreshed specs with \`openspec list --specs\` and address any validation issues before handing off.`;
 
+// RooCode-specific enhancements
+const rooCodeEnhancements = `**RooCode-Specific Features**
+- Use @/openspec/AGENTS.md and @/openspec/project.md for context mentions to efficiently load OpenSpec documentation
+- Leverage concurrent file reads to load multiple OpenSpec files at once for better context understanding
+- Use Code Actions (lightbulb menu) for quick access to OpenSpec-related operations
+- Take advantage of RooCode's tool approval workflow to ensure safe execution of OpenSpec commands`;
+
+// Qoder-specific enhancements
+const qoderEnhancements = `**Qoder-Specific Features**
+- Follow tasks.md precisely and execute tasks sequentially, one at a time
+- Update task status markers in tasks.md immediately after completing each task (- [ ] to - [x])
+- Maintain accurate reflection of actual progress in tasks.md at all times
+- Use @/openspec/AGENTS.md and @/openspec/project.md for context mentions to efficiently load OpenSpec documentation
+- Reference @/openspec/changes/<id>/tasks.md for implementation steps and progress tracking`;
+
+const enhancedProposalSteps = `${proposalSteps}
+
+${rooCodeEnhancements}`;
+const enhancedApplySteps = `${applySteps}
+
+${rooCodeEnhancements}
+
+${qoderEnhancements}`;
+const enhancedArchiveSteps = `${archiveSteps}
+
+${rooCodeEnhancements}
+
+${qoderEnhancements}`;
+
 export const slashCommandBodies: Record<SlashCommandId, string> = {
-  proposal: [proposalGuardrails, proposalSteps, proposalReferences].join('\n\n'),
-  apply: [baseGuardrails, applySteps, applyReferences].join('\n\n'),
-  archive: [baseGuardrails, archiveSteps, archiveReferences].join('\n\n')
+  proposal: [proposalGuardrails, enhancedProposalSteps, proposalReferences].join('\n\n'),
+  apply: [baseGuardrails, enhancedApplySteps, applyReferences].join('\n\n'),
+  archive: [baseGuardrails, enhancedArchiveSteps, archiveReferences].join('\n\n')
 };
 
 export function getSlashCommandBody(id: SlashCommandId): string {

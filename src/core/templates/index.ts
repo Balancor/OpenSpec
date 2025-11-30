@@ -7,6 +7,8 @@ import { clineTemplate } from './cline-template.js';
 import { costrictTemplate } from './costrict-template.js';
 import { agentsRootStubTemplate } from './agents-root-stub.js';
 import { agentsRootStubChineseTemplate } from './agents-root-stub-chinese.js';
+import { qoderTemplate } from './qoder-template.js';
+import { qoderChineseTemplate } from './qoder-chinese-template.js';
 import { getSlashCommandBody, SlashCommandId } from './slash-command-templates.js';
 
 export interface Template {
@@ -45,6 +47,10 @@ export class TemplateManager {
 
   static getAgentsStandardTemplate(language: 'en' | 'zh' = 'en'): string {
     return language === 'zh' ? agentsRootStubChineseTemplate : agentsRootStubTemplate;
+  }
+
+  static getQoderTemplate(language: 'en' | 'zh' = 'zh'): string {
+    return language === 'zh' ? qoderChineseTemplate : qoderTemplate;
   }
 
   static getSlashCommandBody(id: SlashCommandId): string {

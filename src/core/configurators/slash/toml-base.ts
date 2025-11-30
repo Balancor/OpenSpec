@@ -43,8 +43,28 @@ prompt = """
 ${OPENSPEC_MARKERS.start}
 ${body}
 ${OPENSPEC_MARKERS.end}
-"""
-`;
+"""`;
+  }
+
+  // Enhanced TOML generation with argument hints for tools like RooCode
+  protected generateTOMLWithHints(id: SlashCommandId, body: string, argumentHint?: string): string {
+    const description = this.getDescription(id);
+    const lines: string[] = [];
+    
+    lines.push(`description = "${description}"`);
+    
+    if (argumentHint) {
+      lines.push(`argument-hint = "${argumentHint}"`);
+    }
+    
+    lines.push('');
+    lines.push('prompt = """');
+    lines.push(`${OPENSPEC_MARKERS.start}`);
+    lines.push(`${body}`);
+    lines.push(`${OPENSPEC_MARKERS.end}`);
+    lines.push('"""');
+    
+    return lines.join('\n');
   }
 
   // Override updateBody to handle TOML format
